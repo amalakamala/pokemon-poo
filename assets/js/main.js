@@ -27,4 +27,5 @@ console.log(Charmander.mostrarPokemon())
 console.log(Pikachu.nivelDeAmistad)
 console.log(Squirtle.aumentarAmistad(20))
 
+
 mostrar.innerHTML = Pikachu.mostrarPokemon() + "<br>" + Charmander.mostrarPokemon() + "<br>Nivel de vida Charmander: " + Charmander.vida;
