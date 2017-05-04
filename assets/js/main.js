@@ -22,6 +22,9 @@ const Squirtle = new Pokemon("Squirtle","rojo",70)
 
 Pikachu.atacar(Charmander)
 console.log(Charmander.vida)
+
 console.log(Charmander.mostrarPokemon())
 console.log(Pikachu.nivelDeAmistad)
 console.log(Squirtle.aumentarAmistad(20))
+
+mostrar.innerHTML = Pikachu.mostrarPokemon();
