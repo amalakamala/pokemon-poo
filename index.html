@@ -4,16 +4,30 @@
 	<meta charset="UTF-8">
 	<title>POKEMON</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
-
 </head>
-<body>
-	<header>
-		<h3>BIENVENIDO A POKEMON</h3>
+<body background="assets/img/foto.jpg">
+	<header align="center">
+		<img src="assets/img/logo-Pokemon.png" alt="Smiley face" height="300"><br>
 	</header>
-	<section>
-		<div id="mostrar"></div>
+
+	<section align="center" class="sleccion">
+		<label for="superpoder">Escoge tus <b>POKEMON</b> para el combate</label><br><br>	
+			<select id="elegir-pokemon" required>
+				<option value="Pikachu" class="pikachu">Pikachu</option>
+				<option value="Charmander" class="charmander">Charmander</option>
+				<option value="Squirtle" class="squirtle">Squirtle</option>
+			</select>
+			<select id="elegir-pokemon-dos" required>
+				<option value="Pikachu" class="pikachu">Pikachu</option>
+				<option value="Charmander" class="charmander">Charmander</option>
+				<option value="Squirtle" class="squirtle">Squirtle</option>
+			</select>
+			<a class="boton" href="#" onclick="peleaPokemon()">Pelear</a><br>
+			
+			<p id="resultado"></p>
+
 	</section>
 
-	<script src=assets/js/main.js type="text/javascript" src></script>
+	<script src='assets/js/main.js' type="text/javascript"></script>
 </body>
 </html>
