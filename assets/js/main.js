@@ -1,18 +1,23 @@
 function Pokemon(nombre,color,poderDeAtaque){
-	this.nombre = nombre
-	this.color = color
-	this.nivelDeAmistad = 0
-	this.vida = 100 
-  	this.poderDeAtaque = poderDeAtaque
+	this.nombre = nombre;
+	this.color = color;
+	this.nivelDeAmistad = 0;
+	this.vida = 100;
+  	this.poderDeAtaque = poderDeAtaque;
   
 	this.mostrarPokemon = function(){
-		return("hola, soy: " + this.nombre + " y soy de color : " + this.color)
+		return("hola, soy: " + this.nombre + " y soy de color : " + this.color);
 	}
 	this.aumentarAmistad = function(valor){
-		return(this.nivelDeAmistad = this.nivelDeAmistad + valor)
+		return(this.nivelDeAmistad = this.nivelDeAmistad + valor);
 	}
 	this.atacar = function(pokemon){
-		return pokemon.vida = pokemon.vida - this.poderDeAtaque
+		return pokemon.vida = pokemon.vida - this.poderDeAtaque;
+
+		if(pokemon.vida < 0){
+			alert("Tu pokémon ha muerto... \n Eres el peor Maestro Pokemon");
+			return;	
+		}
 	}
 }
 
@@ -58,6 +63,10 @@ function peleaPokemon(){
 		resultado = 0;
 	}
 
+	if(selectorUno.value == selectorDos.value && resultado < 0){
+		alert("Tu pokémon ha muerto... \n Eres el peor Maestro Pokemon");
+		return;	
+	}	
 
 	var etiquetaResultado = document.getElementById("resultado");
 	var textoResultado = selectorUno.value + " atacó a " + selectorDos.value + " <br> " +  selectorDos.value + " tiene una vida de : " + resultado;	
@@ -65,3 +74,7 @@ function peleaPokemon(){
 	etiquetaResultado.innerHTML = textoResultado;
 }
 
+/* P.d
+Cuando se ataca a un pokemon varias veces va perdiendo vida, hasta que muere, 
+pero no me valida la condicion que si resultado es menor a cero que deje que pelear o ponga un alert.
+*/
