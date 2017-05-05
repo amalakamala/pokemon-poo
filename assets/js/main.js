@@ -13,81 +13,67 @@ function Pokemon(nombre,color,poderDeAtaque){
 	}
 	this.atacar = function(pokemon){
 		return pokemon.vida = pokemon.vida - this.poderDeAtaque
+		if(pokemon.vida < 0){
+			alert("Tu pokémon ha muerto... \n Eres el peor Maestro Pokemon");
+			return;	
+		}
 	}
 }
 
+//Array para los pokemos creados anteriormente. El push ingresa sus valores
+var arr = [];
 
 const Pikachu = new Pokemon ("Pikachu","amarillo",100)
+arr.push(Pikachu)
 const Charmander = new Pokemon("Charmander","rojo",20)
+arr.push(Charmander)
 const Squirtle = new Pokemon("Squirtle","rojo",70)
-
-Pikachu.atacar(Charmander);
-console.log(Charmander.vida)
+arr.push(Squirtle)
 
 
+//Selecciono id desde html y creo las opciones para los select
+var selectorUno = document.getElementById('elegir-pokemon');
+arr.forEach(function(p){return ( selectorUno.innerHTML += '<option>' + p.nombre + '</option>')});
+
+var selectorDos = document.getElementById('elegir-pokemon-dos');
+arr.forEach(function(po){return ( selectorDos.innerHTML += '<option>' + po.nombre + '</option>')});
+
+
+/*Funcion de la Pelea, 
+Retorno concatenacion de los valores elegidos (pokemon)
+como son un array de objeto estos estan enlazados a los valores de vida y poderDeAtaque
+Esto nos ayudara a saber resultado de las peleas
+*/
 function peleaPokemon(){
-	var selectUno = document.getElementById("elegir-pokemon").value;
-	var selectDos = document.getElementById("elegir-pokemon-dos").value;
 
-	if(selectUno == selectDos){
+	var resultado = 0;
+	
+	//Condicion segun nivel de ataque del pokemon
+	if(selectorUno.value == selectorDos.value){
 		alert("No puedes hacer Pelear dos pokemones Iguales")
 		return;
+	}else if( selectorUno.value == "Charmander" && selectorDos.value == "Pikachu"){
+		resultado = Charmander.atacar(Pikachu);
+	}else if(selectorUno.value == "Charmander" && selectorDos.value == "Squirtle"){
+		resultado = Charmander.atacar(Squirtle);
+	}else if(selectorUno.value == "Squirtle" && selectorDos.value == "Pikachu"){
+		resultado = Squirtle.atacar(Pikachu);
+	}else{
+		resultado = 0;
 	}
 
-
-	var ataqueUno = parseInt(pedirCampo("Ingresa poder de ataque del primer Pokemon \nEl valor debe ser menor de 100"));
-	var ataqueDos = parseInt(pedirCampo("Ingresa poder de ataque del segundo Pokemon \nEl valor debe ser menor de 100"));
-	
-
-	var pimerPoke = new Pokemon (selectUno,"amarillo",ataqueUno)
-	var segundoPoke = new Pokemon (selectDos,"rojo",ataqueDos)
-
+	if(selectorUno.value == selectorDos.value && resultado < 0){
+		alert("Tu pokémon ha muerto... \n Eres el peor Maestro Pokemon");
+		return;	
+	}	
 
 	var etiquetaResultado = document.getElementById("resultado");
-	var textoResultado = selectUno + " atacó a " + selectDos + " <br> " +  selectDos + " tiene una vida de : " + pimerPoke.atacar(segundoPoke);	
+	var textoResultado = selectorUno.value + " atacó a " + selectorDos.value + " <br> " +  selectorDos.value + " tiene una vida de : " + resultado;	
 
 	etiquetaResultado.innerHTML = textoResultado;
 }
 
-
-function pedirCampo(nombreCampo){
-	var campo = "";
-	do{
-		campo = prompt("Ingrese " + nombreCampo);
-	}while(campo=="")
-	return campo;
-}
-
-
-/*
-De esta manera me falta crear atributos a traves de 'setAttribute'
-
-function crearOptionUno(elPoke){
-var optionUno = document.getElementById("elegir-pokemon");
-var optionAux = document.createElement("option");
-var namePokemon = document.createTextNode(elPoke.nombre);
-optionAux.appendChild(namePokemon);
-optionUno.appendChild(optionAux);
-}
-
-function crearOptionDos(elPoke){
-var optionUno = document.getElementById("elegir-pokemon-dos");
-var optionAux = document.createElement("option");
-var namePokemon = document.createTextNode(elPoke.nombre);
-optionAux.appendChild(namePokemon);
-optionUno.appendChild(optionAux);
-}
-
-crearOptionUno(Pikachu);
-crearOptionUno(Charmander);
-crearOptionUno(Squirtle);
-
-crearOptionDos(Pikachu);
-crearOptionDos(Charmander);
-crearOptionDos(Squirtle);
-
-
-function peleaPokemon(){
-	return ( algo + " ataco a " + algo  + " y " +  algo  + " tiene una vida de : " + vida)
-}
+/* P.d
+Cuando se ataca a un pokemon varias veces va perdiendo vida, hasta que muere, 
+pero no me valida la condicion que si resultado es menor a cero que deje que pelear o ponga un alert.
 */
